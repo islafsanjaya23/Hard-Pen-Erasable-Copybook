@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hard Pen Erasable Copybook - Buku Tulis Praktis untuk Anak</title>
-    <meta name="description" content="Buku tulis praktis dengan pena yang bisa dihapus, membantu anak usia 1-5 tahun belajar menulis dengan cepat dan menyenangkan. Promo isi 4 pcs hanya Rp 175.000!">
+    <title>Hard Pen Erasable Copybook - Buku Tulis Tahan Lama</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -12,12 +11,15 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#8360c3',
-                        secondary: '#2ebf91',
+                        primary: '#FF6B6B',
+                        secondary: '#4ECDC4',
+                        accent: '#FFE66D',
+                        dark: '#292F36',
+                        light: '#F7FFF7'
                     },
-                    backgroundImage: {
-                        'gradient-purple-green': 'linear-gradient(135deg, #8360c3 0%, #2ebf91 100%)',
-                    }
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                    },
                 }
             }
         }
@@ -27,770 +29,601 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
         
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(131, 96, 195, 0.9) 0%, rgba(46, 191, 145, 0.9) 100%);
-        }
-        
-        .product-card {
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        .hero-section {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
         }
         
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         
-        .floating-wa {
-            animation: float 3s ease-in-out infinite;
+        .testimonial-card {
+            transition: all 0.3s ease;
         }
         
-        @keyframes float {
+        .testimonial-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
         
-        .zoom-effect {
-            transition: transform 0.3s ease;
+        .pulse {
+            animation: pulse 2s infinite;
         }
         
-        .zoom-effect:hover {
-            transform: scale(1.05);
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         
-        .countdown-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-        }
-        
-        .testimonial-card {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .sticky-nav {
-            transition: all 0.3s ease;
-        }
-        
-        .sticky-nav.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
+        /* Modal styles */
         .modal {
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
         }
         
         .modal-content {
-            transition: transform 0.3s ease;
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 5%;
         }
         
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
         }
         
-        .modal.active .modal-content {
-            transform: translateY(0);
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/6289537990566" class="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl floating-wa">
-        <i class="fab fa-whatsapp text-2xl"></i>
-    </a>
+    <!-- Floating WhatsApp Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="https://api.whatsapp.com/send?phone=62895379905566&text=Halo%2C%20saya%20menginginkan%20Hard%20Pen%20Erasable%20Copybook" 
+           class="bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg flex items-center justify-center transition-all duration-300 transform hover:scale-110"
+           style="width: 60px; height: 60px;">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </a>
+    </div>
 
-    <!-- Sticky Navigation -->
-    <nav class="sticky-nav fixed top-0 left-0 right-0 z-40 bg-white py-3">
-        <div class="container mx-auto px-4 flex justify-between items-center">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center">
-                <span class="text-xl font-bold text-primary">Hard Pen Erasable Copybook</span>
+                <img src="https://static.compgoo.com/8b4ad/616e8281614d6f1fb45163f609536567.640x1000.png" 
+                     alt="Hard Pen Logo" class="h-12">
+                <span class="ml-2 text-xl font-bold text-dark">Hard Pen</span>
             </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="text-gray-700 hover:text-primary font-medium">Beranda</a>
-                <a href="#features" class="text-gray-700 hover:text-primary font-medium">Fitur</a>
-                <a href="#gallery" class="text-gray-700 hover:text-primary font-medium">Galeri</a>
-                <a href="#testimonials" class="text-gray-700 hover:text-primary font-medium">Testimoni</a>
-                <a href="#faq" class="text-gray-700 hover:text-primary font-medium">FAQ</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#features" class="text-dark hover:text-primary font-medium">Fitur</a>
+                <a href="#gallery" class="text-dark hover:text-primary font-medium">Galeri</a>
+                <a href="#testimonials" class="text-dark hover:text-primary font-medium">Testimoni</a>
+                <a href="#faq" class="text-dark hover:text-primary font-medium">FAQ</a>
             </div>
             <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
+                <button id="menu-toggle" class="text-dark focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
         </div>
-    </nav>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden fixed inset-0 z-30 bg-white pt-16">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex flex-col space-y-4">
-                <a href="#home" class="text-gray-700 hover:text-primary font-medium py-2 border-b">Beranda</a>
-                <a href="#features" class="text-gray-700 hover:text-primary font-medium py-2 border-b">Fitur</a>
-                <a href="#gallery" class="text-gray-700 hover:text-primary font-medium py-2 border-b">Galeri</a>
-                <a href="#testimonials" class="text-gray-700 hover:text-primary font-medium py-2 border-b">Testimoni</a>
-                <a href="#faq" class="text-gray-700 hover:text-primary font-medium py-2 border-b">FAQ</a>
-                <a href="https://alya.orderonline.id/hard-pen-erasable-copybook" class="bg-primary text-white font-medium py-2 px-4 rounded-full text-center">Beli Sekarang</a>
-            </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-4 shadow-md">
+            <a href="#features" class="block py-2 text-dark hover:text-primary">Fitur</a>
+            <a href="#gallery" class="block py-2 text-dark hover:text-primary">Galeri</a>
+            <a href="#testimonials" class="block py-2 text-dark hover:text-primary">Testimoni</a>
+            <a href="#faq" class="block py-2 text-dark hover:text-primary">FAQ</a>
         </div>
-    </div>
+    </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-gradient pt-24 pb-16 md:pt-32 md:pb-24 text-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-8">
-                    <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm rounded-lg p-4 mb-6 inline-block">
-                        <span class="font-bold">PROMO HARI INI</span>
-                    </div>
-                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">Hard Pen Erasable Copybook</h1>
-                    <p class="text-xl mb-6">Bantu Anak Anda Belajar Menulis dengan Cepat dan Menyenangkan!</p>
-                    <div class="bg-white bg-opacity-20 rounded-lg p-4 mb-6">
-                        <div class="flex items-center mb-2">
-                            <span class="line-through text-gray-300 mr-3">Rp 398.500</span>
-                            <span class="bg-red-500 text-white px-2 py-1 rounded text-sm font-bold">DISKON 56%</span>
+    <section class="hero-section text-white py-12 md:py-20">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Buku Tulis <span class="text-accent">Anti Sobek</span> dengan Penghapus Khusus</h1>
+                <p class="text-xl mb-6">Solusi praktis untuk catatan rapi tanpa coretan. Tulis, hapus, tulis ulang tanpa merusak kertas!</p>
+                
+                <div class="bg-white rounded-lg p-4 shadow-lg inline-block mb-6">
+                    <div class="flex items-center">
+                        <div class="bg-primary text-white rounded-full p-2 mr-3">
+                            <i class="fas fa-gift text-xl"></i>
                         </div>
-                        <div class="text-3xl font-bold text-secondary">Rp 175.000</div>
-                        <div class="text-sm mt-1">Paket Hemat Isi 4 Buku + 1 Pen</div>
-                    </div>
-                    <div class="countdown-box rounded-lg p-4 mb-6 max-w-md">
-                        <div class="text-sm mb-2">PROMO BERAKHIR DALAM:</div>
-                        <div id="countdown" class="flex space-x-2">
-                            <div class="bg-white text-primary rounded p-2 text-center flex-1">
-                                <div class="text-xl font-bold">00</div>
-                                <div class="text-xs">Jam</div>
-                            </div>
-                            <div class="bg-white text-primary rounded p-2 text-center flex-1">
-                                <div class="text-xl font-bold">00</div>
-                                <div class="text-xs">Menit</div>
-                            </div>
-                            <div class="bg-white text-primary rounded p-2 text-center flex-1">
-                                <div class="text-xl font-bold">00</div>
-                                <div class="text-xs">Detik</div>
-                            </div>
+                        <div>
+                            <p class="text-dark font-bold">GRATIS 1 Buku Tambahan</p>
+                            <p class="text-gray-600 text-sm">Untuk pembelian hari ini saja!</p>
                         </div>
-                    </div>
-                    <a href="https://alya.orderonline.id/hard-pen-erasable-copybook" class="bg-secondary hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full inline-flex items-center transition duration-300 shadow-lg">
-                        <span>Pesan Sekarang</span>
-                        <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                    <div class="mt-4 flex items-center text-sm">
-                        <div class="flex mr-2">
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                        </div>
-                        <span>500+ Ibu Telah Membeli</span>
                     </div>
                 </div>
-                <div class="md:w-1/2">
-                    <div class="relative">
-                        <img src="https://static.compgoo.com/8b4ad/616e8281614d6f1fb45163f609536567.640x1000.png" alt="Hard Pen Erasable Copybook" class="w-full h-auto rounded-lg shadow-2xl zoom-effect">
-                        <div class="absolute -bottom-4 -left-4 bg-white p-2 rounded-lg shadow-lg">
-                            <div class="flex items-center">
-                                <div class="bg-red-500 text-white text-xs px-2 py-1 rounded mr-2">STOK TERBATAS</div>
-                                <div class="text-xs text-gray-600">Tersisa 23 paket</div>
-                            </div>
-                        </div>
-                    </div>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://alya.orderonline.id/hard-pen-erasable-copybook" 
+                       class="bg-accent hover:bg-yellow-500 text-dark font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg pulse">
+                        BELI SEKARANG <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#features" class="border-2 border-white text-white font-bold py-3 px-6 rounded-full hover:bg-white hover:text-primary transition">
+                        LIHAT FITUR <i class="fas fa-chevron-down ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://kmh.dzbueat.com/third/20241225/4ceb63d47bd3674de96ce04706480cfa5582532.png" 
+                     alt="Hard Pen Product" class="w-full max-w-md floating">
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center text-center">
+                <div class="w-full md:w-1/3 px-4 py-4">
+                    <div class="text-4xl font-bold text-primary" id="customer-count">0</div>
+                    <div class="text-gray-600">Pelanggan Puas</div>
+                </div>
+                <div class="w-full md:w-1/3 px-4 py-4">
+                    <div class="text-4xl font-bold text-primary" id="product-sold">0</div>
+                    <div class="text-gray-600">Produk Terjual</div>
+                </div>
+                <div class="w-full md:w-1/3 px-4 py-4">
+                    <div class="text-4xl font-bold text-primary" id="stock-left">0</div>
+                    <div class="text-gray-600">Stok Tersisa</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Trust Badges -->
-    <section class="bg-white py-8 shadow-sm">
+    <!-- Problem Solution Section -->
+    <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
-            <div class="flex flex-wrap justify-center items-center gap-6 md:gap-12">
-                <div class="flex items-center">
-                    <i class="fas fa-shield-alt text-primary text-2xl mr-2"></i>
-                    <span class="text-gray-700">Garansi 100%</span>
+            <h2 class="text-3xl font-bold text-center mb-12 text-dark">Masalah yang Sering Dihadapi & Solusi Kami</h2>
+            
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2 bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-times-circle text-red-500 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark">Masalah Umum</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-primary mt-1 mr-2"></i>
+                            <span>Buku tulis biasa mudah sobek saat dihapus</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-primary mt-1 mr-2"></i>
+                            <span>Coretan tidak bisa dihapus bersih</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-primary mt-1 mr-2"></i>
+                            <span>Kertas cepat kotor karena sering dihapus</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-primary mt-1 mr-2"></i>
+                            <span>Biaya sering membeli buku baru</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="flex items-center">
-                    <i class="fas fa-truck text-primary text-2xl mr-2"></i>
-                    <span class="text-gray-700">Gratis Ongkir</span>
-                </div>
-                <div class="flex items-center">
-                    <i class="fas fa-credit-card text-primary text-2xl mr-2"></i>
-                    <span class="text-gray-700">Bayar di Tempat</span>
-                </div>
-                <div class="flex items-center">
-                    <i class="fas fa-headset text-primary text-2xl mr-2"></i>
-                    <span class="text-gray-700">CS 24 Jam</span>
+                
+                <div class="md:w-1/2 bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark">Solusi Hard Pen</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Kertas khusus tahan lama, tidak sobek saat dihapus</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Penghapus khusus menghilangkan tulisan tanpa bekas</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Bisa ditulis ulang hingga 1000x tanpa rusak</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Hemat biaya karena buku bisa digunakan berkali-kali</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-16 bg-gray-50">
+    <section id="features" class="py-12 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Mengapa Memilih Hard Pen Erasable Copybook?</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Solusi praktis untuk membantu anak usia 1-5 tahun belajar menulis dengan cepat dan menyenangkan</p>
-            </div>
+            <h2 class="text-3xl font-bold text-center mb-12 text-dark">Keunggulan Hard Pen Erasable Copybook</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl p-6 product-card">
-                    <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-pen-fancy text-primary text-xl"></i>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                    <div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-recycle text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Pena Bisa Dihapus</h3>
-                    <p class="text-gray-600">Tulisan bisa dihapus dan ditulis ulang, membuat anak bebas berlatih tanpa takut salah.</p>
+                    <h3 class="text-xl font-bold text-center mb-3 text-dark">Ramah Lingkungan</h3>
+                    <p class="text-gray-600 text-center">Mengurangi sampah kertas karena bisa digunakan berulang kali hingga 1000x.</p>
                 </div>
                 
-                <div class="bg-white rounded-xl p-6 product-card">
-                    <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-child text-primary text-xl"></i>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                    <div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-eraser text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Cepat Belajar</h3>
-                    <p class="text-gray-600">Metode khusus yang membantu anak usia 1-5 tahun cepat menguasai dasar-dasar menulis.</p>
+                    <h3 class="text-xl font-bold text-center mb-3 text-dark">Penghapus Khusus</h3>
+                    <p class="text-gray-600 text-center">Menghapus tulisan dengan bersih tanpa merusak permukaan kertas.</p>
                 </div>
                 
-                <div class="bg-white rounded-xl p-6 product-card">
-                    <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-recycle text-primary text-xl"></i>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                    <div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-book text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Bisa Dipakai Berulang</h3>
-                    <p class="text-gray-600">Buku bisa digunakan berulang kali, hemat dan ramah lingkungan.</p>
+                    <h3 class="text-xl font-bold text-center mb-3 text-dark">Kualitas Premium</h3>
+                    <p class="text-gray-600 text-center">Kertas tebal 120gsm dengan jilidan kuat yang tidak mudah lepas.</p>
                 </div>
-                
-                <div class="bg-white rounded-xl p-6 product-card">
-                    <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-book text-primary text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">4 Buku + 1 Pen</h3>
-                    <p class="text-gray-600">Paket lengkap dengan 4 buku latihan dan 1 pena khusus yang bisa dihapus.</p>
-                </div>
-                
-                <div class="bg-white rounded-xl p-6 product-card">
-                    <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-paint-brush text-primary text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Desain Menarik</h3>
-                    <p class="text-gray-600">Ilustrasi warna-warni yang disukai anak-anak, membuat belajar lebih menyenangkan.</p>
-                </div>
-                
-                <div class="bg-white rounded-xl p-6 product-card">
-                    <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-award text-primary text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Kualitas Premium</h3>
-                    <p class="text-gray-600">Bahan berkualitas tinggi, tahan lama, dan aman untuk anak-anak.</p>
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center">
-                <a href="https://alya.orderonline.id/hard-pen-erasable-copybook" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full inline-flex items-center transition duration-300 shadow-lg">
-                    <span>Dapatkan Sekarang</span>
-                    <i class="fas fa-shopping-cart ml-2"></i>
-                </a>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="py-16 bg-white">
+    <!-- Product Gallery -->
+    <section id="gallery" class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Galeri Produk</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Lihat bagaimana Hard Pen Erasable Copybook membantu anak-anak belajar menulis dengan cara yang menyenangkan</p>
-            </div>
+            <h2 class="text-3xl font-bold text-center mb-12 text-dark">Galeri Produk</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="rounded-xl overflow-hidden shadow-lg">
-                    <img src="https://static.compgoo.com/8b4ad/616e8281614d6f1fb45163f609536567.640x1000.png" alt="Hard Pen Erasable Copybook" class="w-full h-auto cursor-pointer" onclick="openModal(this.src)">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://kmh.dzbueat.com/third/20241225/4a2ef25c8c5c03c7a367d86b272b9817420852.png" 
+                         alt="Hard Pen Product 1" class="w-full h-auto rounded-lg shadow hover:shadow-lg transition">
                 </div>
-                <div class="rounded-xl overflow-hidden shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80" alt="Anak menggunakan Hard Pen Erasable Copybook" class="w-full h-auto cursor-pointer" onclick="openModal(this.src)">
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://kmh.dzbueat.com/third/20241225/e512c84d9ad1bdd01d0764ed51295e974570663.png" 
+                         alt="Hard Pen Product 2" class="w-full h-auto rounded-lg shadow hover:shadow-lg transition">
                 </div>
-                <div class="rounded-xl overflow-hidden shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1542816417-0983675d45f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80" alt="Detail pena yang bisa dihapus" class="w-full h-auto cursor-pointer" onclick="openModal(this.src)">
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://kmh.dzbueat.com/third/20241225/cb1cc2a57f2f7ae0cd9dc00f17ce7d873892607.png" 
+                         alt="Hard Pen Product 3" class="w-full h-auto rounded-lg shadow hover:shadow-lg transition">
                 </div>
-                <div class="rounded-xl overflow-hidden shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80" alt="Paket lengkap 4 buku" class="w-full h-auto cursor-pointer" onclick="openModal(this.src)">
-                </div>
-                <div class="rounded-xl overflow-hidden shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1542816417-0983675d45f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80" alt="Anak sedang menulis" class="w-full h-auto cursor-pointer" onclick="openModal(this.src)">
-                </div>
-                <div class="rounded-xl overflow-hidden shadow-lg">
-                    <img src="https://static.compgoo.com/8b4ad/616e8281614d6f1fb45163f609536567.640x1000.png" alt="Tulisan bisa dihapus" class="w-full h-auto cursor-pointer" onclick="openModal(this.src)">
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://kmh.dzbueat.com/third/20241225/eb2c3739c07b488176ea05579a56a0418580772.png" 
+                         alt="Hard Pen Product 4" class="w-full h-auto rounded-lg shadow hover:shadow-lg transition">
                 </div>
             </div>
-            
-            <div class="mt-12 text-center">
-                <a href="https://alya.orderonline.id/hard-pen-erasable-copybook" class="bg-gradient-purple-green hover:opacity-90 text-white font-bold py-3 px-8 rounded-full inline-flex items-center transition duration-300 shadow-lg">
-                    <span>Lihat Lebih Banyak</span>
-                    <i class="fas fa-images ml-2"></i>
-                </a>
-            </div>
+        </div>
+        
+        <!-- The Modal -->
+        <div id="galleryModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modalImage">
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-16 bg-gray-50">
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-12 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Apa Kata Ibu-Ibu?</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Testimoni nyata dari para ibu yang telah menggunakan Hard Pen Erasable Copybook untuk anak-anak mereka</p>
-            </div>
+            <h2 class="text-3xl font-bold text-center mb-12 text-dark">Apa Kata Pelanggan Kami?</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl p-6 testimonial-card">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="testimonial-card bg-gray-50 p-6 rounded-lg shadow">
                     <div class="flex items-center mb-4">
-                        <div class="flex mr-2">
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                        </div>
-                        <span class="text-sm text-gray-500">1 minggu lalu</span>
-                    </div>
-                    <p class="text-gray-700 mb-4">"Anak saya yang berusia 3 tahun jadi semangat belajar menulis. Tulisan bisa dihapus jadi dia tidak takut salah. Sekarang sudah bisa menulis namanya sendiri!"</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-gray-300 mr-3 overflow-hidden">
-                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Testimoni 1" class="w-full h-full object-cover">
-                        </div>
+                        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold mr-3">A</div>
                         <div>
-                            <h4 class="font-bold">Ibu Sarah</h4>
-                            <p class="text-sm text-gray-500">Ibu dari Alika (3 tahun)</p>
+                            <h4 class="font-bold text-dark">Anita S.</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
                         </div>
                     </div>
+                    <p class="text-gray-600">"Buku ini benar-benar mengubah cara saya mencatat. Sekarang tidak perlu khawatir salah tulis karena bisa dihapus dengan mudah. Anak-anak saya juga suka pakai untuk belajar."</p>
                 </div>
                 
-                <div class="bg-white rounded-xl p-6 testimonial-card">
+                <div class="testimonial-card bg-gray-50 p-6 rounded-lg shadow">
                     <div class="flex items-center mb-4">
-                        <div class="flex mr-2">
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                        </div>
-                        <span class="text-sm text-gray-500">2 minggu lalu</span>
-                    </div>
-                    <p class="text-gray-700 mb-4">"Awalnya ragu, tapi setelah pakai anak saya jadi lebih cepat belajar. Buku dan penanya berkualitas bagus. Worth it banget untuk harganya!"</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-gray-300 mr-3 overflow-hidden">
-                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Testimoni 2" class="w-full h-full object-cover">
-                        </div>
+                        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold mr-3">D</div>
                         <div>
-                            <h4 class="font-bold">Ibu Rina</h4>
-                            <p class="text-sm text-gray-500">Ibu dari Bima (4 tahun)</p>
+                            <h4 class="font-bold text-dark">Dewi M.</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
                         </div>
                     </div>
+                    <p class="text-gray-600">"Sebagai mahasiswa, buku ini sangat membantu. Bisa dihapus dan ditulis ulang berkali-kali tanpa rusak. Hemat banget karena tidak perlu beli buku baru terus."</p>
                 </div>
                 
-                <div class="bg-white rounded-xl p-6 testimonial-card">
+                <div class="testimonial-card bg-gray-50 p-6 rounded-lg shadow">
                     <div class="flex items-center mb-4">
-                        <div class="flex mr-2">
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star-half-alt text-yellow-400"></i>
-                        </div>
-                        <span class="text-sm text-gray-500">3 hari lalu</span>
-                    </div>
-                    <p class="text-gray-700 mb-4">"Baru 3 hari pakai, anak saya sudah mulai bisa mencoret-coret dengan lebih terarah. Desain bukunya lucu, anak saya suka banget!"</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-gray-300 mr-3 overflow-hidden">
-                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Testimoni 3" class="w-full h-full object-cover">
-                        </div>
+                        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold mr-3">R</div>
                         <div>
-                            <h4 class="font-bold">Ibu Dewi</h4>
-                            <p class="text-sm text-gray-500">Ibu dari Kirana (2.5 tahun)</p>
+                            <h4 class="font-bold text-dark">Rina K.</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
                         </div>
                     </div>
+                    <p class="text-gray-600">"Kualitas kertasnya premium banget, tebal dan tidak tembus. Penghapusnya juga benar-benar bekerja dengan baik. Sekarang catatan meeting saya selalu rapi."</p>
                 </div>
-            </div>
-            
-            <div class="mt-12 text-center">
-                <a href="https://alya.orderonline.id/hard-pen-erasable-copybook" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full inline-flex items-center transition duration-300 shadow-lg">
-                    <span>Bergabung dengan 500+ Ibu Lainnya</span>
-                    <i class="fas fa-heart ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Paket Harga Spesial</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Dapatkan penawaran terbaik untuk membantu perkembangan menulis anak Anda</p>
-            </div>
-            
-            <div class="max-w-3xl mx-auto bg-gradient-purple-green rounded-xl p-1 shadow-xl">
-                <div class="bg-white rounded-lg p-8">
-                    <div class="flex flex-col md:flex-row items-center justify-between mb-8">
+                
+                <div class="testimonial-card bg-gray-50 p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold mr-3">S</div>
                         <div>
-                            <h3 class="text-2xl font-bold text-gray-800">Paket Super Hemat</h3>
-                            <p class="text-gray-600">Isi 4 Buku + 1 Pen Erasable</p>
-                        </div>
-                        <div class="mt-4 md:mt-0">
-                            <div class="flex items-center">
-                                <span class="line-through text-gray-500 mr-3 text-xl">Rp 398.500</span>
-                                <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">DISKON 56%</span>
-                            </div>
-                            <div class="text-4xl font-bold text-primary mt-2">Rp 175.000</div>
-                        </div>
-                    </div>
-                    
-                    <div class="mb-8">
-                        <h4 class="font-bold text-lg mb-3">Apa yang Anda Dapatkan:</h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
-                                <span>4 Buku Latihan Menulis Hard Pen Erasable Copybook</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
-                                <span>1 Pena Khusus yang Bisa Dihapus</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
-                                <span>Buku dengan Desain Menarik untuk Anak</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
-                                <span>Kertas Berkualitas Tinggi dan Tahan Lama</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
-                                <span>Gratis Ongkos Kirim ke Seluruh Indonesia</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <i class="fas fa-exclamation-circle text-yellow-400"></i>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm text-yellow-700">
-                                    <span class="font-bold">PERHATIAN:</span> Promo ini hanya berlaku untuk 100 pembeli pertama hari ini. Stok sangat terbatas!
-                                </p>
+                            <h4 class="font-bold text-dark">Siti N.</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="text-center">
-                        <a href="https://alya.orderonline.id/hard-pen-erasable-copybook" class="bg-gradient-purple-green hover:opacity-90 text-white font-bold py-4 px-12 rounded-full inline-flex items-center transition duration-300 shadow-lg text-lg">
-                            <i class="fas fa-shopping-cart mr-2"></i>
-                            <span>Pesan Sekarang</span>
-                        </a>
-                        <p class="text-sm text-gray-500 mt-3">*Garansi 100% uang kembali jika tidak puas</p>
-                    </div>
+                    <p class="text-gray-600">"Awalnya ragu karena harganya lebih mahal dari buku biasa. Tapi setelah pakai ternyata worth it banget! Sudah 6 bulan pakai buku yang sama masih seperti baru."</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-16 bg-gray-50">
+    <section id="faq" class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Pertanyaan yang Sering Diajukan</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Temukan jawaban untuk pertanyaan umum tentang Hard Pen Erasable Copybook</p>
-            </div>
+            <h2 class="text-3xl font-bold text-center mb-12 text-dark">Pertanyaan yang Sering Diajukan</h2>
             
             <div class="max-w-3xl mx-auto">
-                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-4">
-                    <div class="faq-item">
-                        <button class="faq-question w-full text-left p-6 font-medium text-lg flex justify-between items-center">
-                            <span>Apa itu Hard Pen Erasable Copybook?</span>
-                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
-                        </button>
-                        <div class="faq-answer px-6 pb-6 hidden">
-                            <p class="text-gray-600">Hard Pen Erasable Copybook adalah buku latihan menulis khusus untuk anak usia 1-5 tahun yang dilengkapi dengan pena yang bisa dihapus. Ini memungkinkan anak-anak untuk berlatih menulis berulang kali tanpa takut membuat kesalahan.</p>
-                        </div>
+                <div class="bg-white rounded-lg shadow-md mb-4 overflow-hidden">
+                    <button class="faq-question w-full text-left p-4 font-medium text-dark hover:bg-gray-100 transition flex justify-between items-center">
+                        <span>Apakah semua jenis pensil bisa dihapus?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer p-4 border-t hidden">
+                        <p class="text-gray-600">Hard Pen dirancang khusus untuk digunakan dengan pensil biasa (HB/2B). Kami merekomendasikan menggunakan pensil dengan tingkat kekerasan sedang untuk hasil terbaik.</p>
                     </div>
                 </div>
                 
-                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-4">
-                    <div class="faq-item">
-                        <button class="faq-question w-full text-left p-6 font-medium text-lg flex justify-between items-center">
-                            <span>Bagaimana cara menghapus tulisan di buku ini?</span>
-                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
-                        </button>
-                        <div class="faq-answer px-6 pb-6 hidden">
-                            <p class="text-gray-600">Anda bisa menghapus tulisan dengan mudah menggunakan ujung penghapus yang ada di bagian belakang pena khusus kami. Cukup gosokkan penghapus pada tulisan, dan tulisan akan menghilang, memungkinkan halaman digunakan kembali.</p>
-                        </div>
+                <div class="bg-white rounded-lg shadow-md mb-4 overflow-hidden">
+                    <button class="faq-question w-full text-left p-4 font-medium text-dark hover:bg-gray-100 transition flex justify-between items-center">
+                        <span>Berapa lama buku ini bisa bertahan?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer p-4 border-t hidden">
+                        <p class="text-gray-600">Dengan perawatan normal, Hard Pen dapat digunakan hingga 1000 kali tulis-hapus. Buku ini memiliki ketahanan yang sangat baik dan tidak akan mengelupas meski sering dihapus.</p>
                     </div>
                 </div>
                 
-                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-4">
-                    <div class="faq-item">
-                        <button class="faq-question w-full text-left p-6 font-medium text-lg flex justify-between items-center">
-                            <span>Berapa lama buku ini bisa bertahan?</span>
-                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
-                        </button>
-                        <div class="faq-answer px-6 pb-6 hidden">
-                            <p class="text-gray-600">Dengan perawatan normal, Hard Pen Erasable Copybook bisa bertahan hingga 2-3 tahun bahkan dengan penggunaan intensif. Kertas kami dirancang khusus untuk tahan terhadap penghapusan berulang kali.</p>
-                        </div>
+                <div class="bg-white rounded-lg shadow-md mb-4 overflow-hidden">
+                    <button class="faq-question w-full text-left p-4 font-medium text-dark hover:bg-gray-100 transition flex justify-between items-center">
+                        <span>Apakah ada warna lain selain putih?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer p-4 border-t hidden">
+                        <p class="text-gray-600">Saat ini kami menyediakan varian warna putih dan abu-abu muda. Kami terus mengembangkan produk dan akan menambah pilihan warna di masa depan.</p>
                     </div>
                 </div>
                 
-                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-4">
-                    <div class="faq-item">
-                        <button class="faq-question w-full text-left p-6 font-medium text-lg flex justify-between items-center">
-                            <span>Apakah produk ini aman untuk anak-anak?</span>
-                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
-                        </button>
-                        <div class="faq-answer px-6 pb-6 hidden">
-                            <p class="text-gray-600">Sangat aman! Semua bahan yang digunakan telah lolos uji keamanan produk anak-anak. Tinta tidak beracun, dan pena dirancang dengan ukuran yang nyaman untuk digenggam anak kecil.</p>
-                        </div>
+                <div class="bg-white rounded-lg shadow-md mb-4 overflow-hidden">
+                    <button class="faq-question w-full text-left p-4 font-medium text-dark hover:bg-gray-100 transition flex justify-between items-center">
+                        <span>Bagaimana cara perawatannya?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer p-4 border-t hidden">
+                        <p class="text-gray-600">Gunakan penghapus yang disertakan dan hindari penghapus yang terlalu kasar. Jauhkan dari sumber panas langsung dan simpan di tempat kering. Hindari membasahi kertas.</p>
                     </div>
                 </div>
-                
-                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-4">
-                    <div class="faq-item">
-                        <button class="faq-question w-full text-left p-6 font-medium text-lg flex justify-between items-center">
-                            <span>Bagaimana cara pemesanannya?</span>
-                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
-                        </button>
-                        <div class="faq-answer px-6 pb-6 hidden">
-                            <p class="text-gray-600">Anda bisa memesan langsung melalui tombol "Pesan Sekarang" di website ini. Kami menerima pembayaran melalui transfer bank, e-wallet, atau COD (Bayar di Tempat) untuk wilayah tertentu.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-4">
-                    <div class="faq-item">
-                        <button class="faq-question w-full text-left p-6 font-medium text-lg flex justify-between items-center">
-                            <span>Berapa lama pengiriman sampai ke saya?</span>
-                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
-                        </button>
-                        <div class="faq-answer px-6 pb-6 hidden">
-                            <p class="text-gray-600">Waktu pengiriman bervariasi tergantung lokasi Anda. Untuk Jabodetabek biasanya 1-2 hari kerja, luar Jawa 3-5 hari kerja, dan wilayah Indonesia Timur 5-7 hari kerja. Kami akan memberikan nomor resi setelah paket dikirim.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center">
-                <p class="text-gray-600 mb-4">Masih ada pertanyaan? Hubungi kami langsung via WhatsApp</p>
-                <a href="https://wa.me/6289537990566" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full inline-flex items-center transition duration-300 shadow-lg">
-                    <i class="fab fa-whatsapp mr-2"></i>
-                    <span>Chat via WhatsApp</span>
-                </a>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 bg-gradient-purple-green text-white">
+    <section class="py-12 bg-primary text-white">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-4">Siap Membantu Anak Anda Belajar Menulis?</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">Jangan lewatkan kesempatan mendapatkan Hard Pen Erasable Copybook dengan harga spesial hari ini!</p>
+            <h2 class="text-3xl font-bold mb-6">Tunggu Apa Lagi?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Dapatkan Hard Pen Erasable Copybook sekarang dan rasakan kemudahan menulis tanpa khawatir salah!</p>
             
-            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
-                <a href="https://alya.orderonline.id/hard-pen-erasable-copybook" class="bg-white hover:bg-gray-100 text-primary font-bold py-4 px-12 rounded-full inline-flex items-center transition duration-300 shadow-lg text-lg">
-                    <i class="fas fa-shopping-cart mr-2"></i>
-                    <span>Pesan Sekarang</span>
+            <div class="bg-white rounded-lg shadow-xl p-6 max-w-2xl mx-auto mb-8">
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="mb-4 md:mb-0">
+                        <div class="text-2xl font-bold text-dark">PAKET HEMAT ISI 4 PCS</div>
+                        <div class="flex items-center">
+                            <span class="text-3xl font-bold text-primary">Rp 175.000</span>
+                            <span class="ml-3 text-gray-500 line-through">Rp 299.000</span>
+                            <span class="ml-3 bg-red-100 text-red-600 px-2 py-1 rounded-full text-sm">Hemat 41%</span>
+                        </div>
+                    </div>
+                    <div class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full flex items-center">
+                        <i class="fas fa-gift mr-2"></i>
+                        <span>GRATIS 1 Buku Tambahan!</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://alya.orderonline.id/hard-pen-erasable-copybook" 
+                   class="bg-accent hover:bg-yellow-500 text-dark font-bold py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg text-lg">
+                    <i class="fas fa-shopping-cart mr-2"></i> BELI SEKARANG
                 </a>
-                <a href="https://wa.me/6289537990566" class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-12 rounded-full inline-flex items-center transition duration-300 shadow-lg text-lg">
-                    <i class="fab fa-whatsapp mr-2"></i>
-                    <span>Konsultasi Dulu</span>
+                <a href="https://api.whatsapp.com/send?phone=62895379905566&text=Halo%2C%20saya%20menginginkan%20Hard%20Pen%20Erasable%20Copybook" 
+                   class="border-2 border-white hover:bg-white hover:text-primary font-bold py-4 px-8 rounded-full transition text-lg">
+                    <i class="fab fa-whatsapp mr-2"></i> CHAT KAMI
                 </a>
             </div>
             
-            <div class="mt-8 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4">
+            <div class="mt-8 bg-white text-dark rounded-lg p-4 inline-block">
                 <div class="flex items-center">
-                    <i class="fas fa-check-circle mr-2"></i>
-                    <span>Garansi 100% Uang Kembali</span>
+                    <i class="fas fa-clock text-primary text-xl mr-2"></i>
+                    <span class="font-bold">Promo Berakhir Dalam:</span>
+                    <div id="countdown" class="ml-2 font-bold text-primary"></div>
                 </div>
-                <div class="flex items-center">
-                    <i class="fas fa-check-circle mr-2"></i>
-                    <span>Gratis Ongkos Kirim</span>
+            </div>
+            
+            <div class="mt-6">
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="stock-bar" class="bg-red-500 h-2.5 rounded-full" style="width: 20%"></div>
                 </div>
-                <div class="flex items-center">
-                    <i class="fas fa-check-circle mr-2"></i>
-                    <span>Stok Terbatas</span>
-                </div>
+                <p class="text-sm mt-2">Stok tersisa: <span id="stock-text" class="font-bold">20</span> dari 100 paket</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-dark text-white py-8">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Hard Pen Erasable Copybook</h3>
-                    <p class="text-gray-400">Solusi praktis untuk membantu anak usia 1-5 tahun belajar menulis dengan cepat dan menyenangkan.</p>
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center mb-4">
+                        <img src="https://static.compgoo.com/8b4ad/616e8281614d6f1fb45163f609536567.640x1000.png" 
+                             alt="Hard Pen Logo" class="h-10">
+                        <span class="ml-2 text-xl font-bold">Hard Pen</span>
+                    </div>
+                    <p class="text-gray-400 max-w-xs">Solusi modern untuk menulis praktis tanpa khawatir salah. Kualitas premium untuk kebutuhan sehari-hari.</p>
                 </div>
                 
-                <div>
-                    <h4 class="font-bold mb-4">Tautan Cepat</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Beranda</a></li>
-                        <li><a href="#features" class="text-gray-400 hover:text-white transition">Fitur</a></li>
-                        <li><a href="#gallery" class="text-gray-400 hover:text-white transition">Galeri</a></li>
-                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition">Testimoni</a></li>
-                        <li><a href="#faq" class="text-gray-400 hover:text-white transition">FAQ</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4">Kontak Kami</h4>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
-                            <a href="tel:0895379905566" class="text-gray-400 hover:text-white transition">0895-3799-0566</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-whatsapp mr-2 text-gray-400"></i>
-                            <a href="https://wa.me/6289537990566" class="text-gray-400 hover:text-white transition">WhatsApp</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
-                            <span class="text-gray-400">cs@hardpen.com</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4">Pembayaran</h4>
-                    <div class="grid grid-cols-3 gap-2">
-                        <div class="bg-white p-2 rounded">
-                            <img src="https://via.placeholder.com/60x40?text=BCA" alt="BCA" class="h-8 mx-auto">
-                        </div>
-                        <div class="bg-white p-2 rounded">
-                            <img src="https://via.placeholder.com/60x40?text=Mandiri" alt="Mandiri" class="h-8 mx-auto">
-                        </div>
-                        <div class="bg-white p-2 rounded">
-                            <img src="https://via.placeholder.com/60x40?text=BNI" alt="BNI" class="h-8 mx-auto">
-                        </div>
-                        <div class="bg-white p-2 rounded">
-                            <img src="https://via.placeholder.com/60x40?text=BRI" alt="BRI" class="h-8 mx-auto">
-                        </div>
-                        <div class="bg-white p-2 rounded">
-                            <img src="https://via.placeholder.com/60x40?text=Gopay" alt="Gopay" class="h-8 mx-auto">
-                        </div>
-                        <div class="bg-white p-2 rounded">
-                            <img src="https://via.placeholder.com/60x40?text=OVO" alt="OVO" class="h-8 mx-auto">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Tautan Cepat</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#features" class="text-gray-400 hover:text-white transition">Fitur</a></li>
+                            <li><a href="#gallery" class="text-gray-400 hover:text-white transition">Galeri</a></li>
+                            <li><a href="#testimonials" class="text-gray-400 hover:text-white transition">Testimoni</a></li>
+                            <li><a href="#faq" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Kontak Kami</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                                <span class="text-gray-400">0857-7990-5566</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fab fa-whatsapp mr-2 text-gray-400"></i>
+                                <a href="https://api.whatsapp.com/send?phone=62895379905566&text=Halo%2C%20saya%20menginginkan%20Hard%20Pen%20Erasable%20Copybook" 
+                                   class="text-gray-400 hover:text-white transition">WhatsApp</a>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                                <span class="text-gray-400">cs@hardpen.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Pembayaran</h3>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="bg-white p-2 rounded flex items-center justify-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Bank_Central_Asia.svg/1200px-Bank_Central_Asia.svg.png" alt="BCA" class="h-6">
+                            </div>
+                            <div class="bg-white p-2 rounded flex items-center justify-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Mandiri_logo_2016.svg/1200px-Bank_Mandiri_logo_2016.svg.png" alt="Mandiri" class="h-6">
+                            </div>
+                            <div class="bg-white p-2 rounded flex items-center justify-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/BNI_logo.svg/1200px-BNI_logo.svg.png" alt="BNI" class="h-6">
+                            </div>
+                            <div class="bg-white p-2 rounded flex items-center justify-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Logo_BRI_%28Bank_Rakyat_Indonesia%29.svg/1200px-Logo_BRI_%28Bank_Rakyat_Indonesia%29.svg.png" alt="BRI" class="h-6">
+                            </div>
+                            <div class="bg-white p-2 rounded flex items-center justify-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Logo_DANA.svg/1200px-Logo_DANA.svg.png" alt="DANA" class="h-6">
+                            </div>
+                            <div class="bg-white p-2 rounded flex items-center justify-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Logo_ovo_purple.svg/1200px-Logo_ovo_purple.svg.png" alt="OVO" class="h-6">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <div class="text-gray-400 mb-4 md:mb-0">
-                    &copy; 2023 Hard Pen Erasable Copybook. All Rights Reserved.
-                </div>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-white transition">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2023 Hard Pen. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Image Modal -->
-    <div id="image-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 opacity-0 invisible transition duration-300">
-        <div class="modal-content transform translate-y-8 relative max-w-4xl w-full p-4">
-            <button id="close-modal" class="absolute -top-10 right-0 text-white text-3xl focus:outline-none">
-                <i class="fas fa-times"></i>
-            </button>
-            <img id="modal-image" src="" alt="" class="w-full h-auto max-h-screen rounded-lg">
-        </div>
-    </div>
-
-    <!-- Sticky Order Button (Mobile) -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg z-40 p-3 flex justify-center">
-        <a href="https://alya.orderonline.id/hard-pen-erasable-copybook" class="bg-gradient-purple-green hover:opacity-90 text-white font-bold py-3 px-8 rounded-full inline-flex items-center transition duration-300 shadow-lg w-full justify-center">
-            <i class="fas fa-shopping-cart mr-2"></i>
-            <span>Pesan Sekarang</span>
-        </a>
-    </div>
-
     <script>
         // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         });
-        
-        // Close mobile menu when clicking on a link
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-        
-        // Sticky Navbar on Scroll
-        const navbar = document.querySelector('.sticky-nav');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+
+        // Counter Animation
+        function animateValue(id, start, end, duration) {
+            let obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Initialize counters when scrolled to stats section
+        let countersInitialized = false;
+        window.addEventListener('scroll', function() {
+            const statsSection = document.querySelector('.stats-section');
+            const position = statsSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+
+            if(position < screenPosition && !countersInitialized) {
+                animateValue('customer-count', 0, 5234, 2000);
+                animateValue('product-sold', 0, 12890, 2000);
+                animateValue('stock-left', 100, 20, 1000);
+                countersInitialized = true;
             }
         });
-        
-        // FAQ Accordion
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const icon = question.querySelector('i');
-                
-                // Toggle answer visibility
-                answer.classList.toggle('hidden');
-                
-                // Rotate icon
-                icon.classList.toggle('transform');
-                icon.classList.toggle('rotate-180');
-                
-                // Close other open answers
-                faqQuestions.forEach(q => {
-                    if (q !== question) {
-                        q.nextElementSibling.classList.add('hidden');
-                        q.querySelector('i').classList.remove('transform', 'rotate-180');
-                    }
-                });
-            });
-        });
-        
+
         // Countdown Timer
         function updateCountdown() {
             const now = new Date();
             const endOfDay = new Date();
-            endOfDay.setHours(23, 59, 59, 999);
+            endOfDay.setHours(23, 59, 59, 0);
             
             const diff = endOfDay - now;
             
@@ -798,80 +631,67 @@
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
-            document.getElementById('countdown').innerHTML = `
-                <div class="bg-white text-primary rounded p-2 text-center flex-1">
-                    <div class="text-xl font-bold">${hours.toString().padStart(2, '0')}</div>
-                    <div class="text-xs">Jam</div>
-                </div>
-                <div class="bg-white text-primary rounded p-2 text-center flex-1">
-                    <div class="text-xl font-bold">${minutes.toString().padStart(2, '0')}</div>
-                    <div class="text-xs">Menit</div>
-                </div>
-                <div class="bg-white text-primary rounded p-2 text-center flex-1">
-                    <div class="text-xl font-bold">${seconds.toString().padStart(2, '0')}</div>
-                    <div class="text-xs">Detik</div>
-                </div>
-            `;
+            document.getElementById('countdown').innerHTML = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
-        
+
         setInterval(updateCountdown, 1000);
         updateCountdown();
-        
-        // Image Modal
-        const modal = document.getElementById('image-modal');
-        const modalImage = document.getElementById('modal-image');
-        const closeModal = document.getElementById('close-modal');
-        
-        function openModal(src) {
-            modalImage.src = src;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeImageModal() {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-        
-        closeModal.addEventListener('click', closeImageModal);
-        
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeImageModal();
-            }
-        });
-        
-        // Exit Intent Popup
-        let shownExitPopup = false;
-        
-        document.addEventListener('mouseout', (e) => {
-            if (!shownExitPopup && e.relatedTarget === null && e.clientY < 0) {
-                shownExitPopup = true;
-                // You can add an exit intent popup here if needed
-            }
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
                 
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
                 
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const offset = 80; // Adjust for fixed header
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - offset;
-                    
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
+                // Close other open answers
+                faqQuestions.forEach(q => {
+                    if (q !== question) {
+                        q.nextElementSibling.classList.add('hidden');
+                        q.querySelector('i').classList.remove('rotate-180');
+                    }
+                });
             });
         });
+
+        // Image Gallery Modal
+        const modal = document.getElementById("galleryModal");
+        const modalImg = document.getElementById("modalImage");
+        const galleryItems = document.querySelectorAll(".gallery-item img");
+        const closeBtn = document.getElementsByClassName("close")[0];
+
+        galleryItems.forEach(item => {
+            item.addEventListener("click", function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            });
+        });
+
+        closeBtn.onclick = function() { 
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Stock Bar Animation
+        let stock = 20;
+        let stockInterval = setInterval(() => {
+            if(stock > 5) {
+                stock--;
+                document.getElementById('stock-text').textContent = stock;
+                document.getElementById('stock-bar').style.width = `${stock}%`;
+            } else {
+                clearInterval(stockInterval);
+            }
+        }, 60000); // Decrease stock every minute
     </script>
 </body>
 </html>
